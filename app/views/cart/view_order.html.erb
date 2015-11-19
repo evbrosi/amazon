@@ -1,0 +1,21 @@
+<h1>My Cart</h1>
+<div class="row">
+	<% if @line_items.empty? %>
+	<p> There's nothing here.  Let's go back to shopping %>
+		<% else %>
+		<% @line_items.each do |line_item| %>
+			<ul>
+				<li><%= line_item.product.name %></li>
+				<li><%= number_to_currency line_item.product.price %>/ea.</li>
+				<li> Quantity <%= line_item.quantity %></li>
+				<li> Subtotal: <%= number_to_currency line_item.line_item_total %> </li>
+				<li> <%= link_to "Remove Item from Cart", remove_from_cart_path(id: line_item.id) %></li>
+			</ul>
+		<% end %>
+	<% end %>
+</div>
+
+<div>
+	<p><%= link_to "Continue Shopping", root_path, class: "btn btn-info" %> </p>
+	<p><%= link_to "Proceed to Checkout", checkout_path, class: "btn btn-success" %> </p>
+</div>
